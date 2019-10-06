@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JAVASCRIPT TUTORIAL CLASS</title>
+        <!-- Custom Theme files -->
+        <link href="{{url_for('static', filename='css/bootstrap.css')}}" type="text/css" rel="stylesheet" media="all">
+        <!-- shop css -->
+        <link href="{{url_for('static', filename='css/shop.css')}}" type="text/css" rel="stylesheet" media="all">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/owl.carousel.min.css')}}">
+        <!-- Owl-Carousel-CSS -->
+        <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" media="all">
+        <!-- font-awesome icons -->
+        <link href="{{url_for('static', filename='css/fontawesome-all.min.css')}}" rel="stylesheet">
+        <!-- //Custom Theme files -->
+        <!-- online-fonts -->
+        <link href="//fonts.googleapis.com/css?family=Elsie+Swash+Caps:400,900" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+        <!-- //online-fonts -->
+</head>
+<body>
+    <form  method="POST" action="#">
+        <div class="form-group">
+            <label for="recipient-name1" class="col-form-label">Full Name</label>
+            <input type="text" class="form-control" placeholder=" " name="fname" id="recipient-name1" required="">
+        </div>
+                
+        <div class="form-group">
+            <label for="recipient-email" class="col-form-label">Email</label>
+            <input type="email" class="form-control" placeholder=" " name="email" id="recipient-email" required="">
+        </div>
+       
+        <div class="sub-w3l">
+            <div class="sub-agile">
+                <input type="checkbox" id="brand2" value="" required>
+                <label for="brand2" class="mb-3">
+                    <span></span>I Accept to the Terms & Conditions</label>
+            </div>
+        </div>
+        <div class="right-w3l">
+            <input type="submit" class="form-control" value="Register">
+        </div>
+    </form>
+</body>
+</html>
