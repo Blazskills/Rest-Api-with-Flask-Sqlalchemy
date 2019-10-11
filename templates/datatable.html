@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Datatables Example</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<h1>My Heading</h1>
+<table id="display2" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Random</th>
+                <th>Date</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+    </table>
+<script>
+function setupData() {
+    $(document).ready(function () {
+        $('.display').DataTable({
+            "ajax": {
+                // "url": "static/objects2.txt", // This works for the static file
+                "url": "/users", // This now works too thanks to @kthorngren
+                "dataType": "json",
+                "dataSrc": "user",
+                "contentType":"application/json"
+            },
+            "columns": [
+                {"data": "id"},
+                {"data": "fname"},
+                {"data": "email"},
+                {"data": "random"},
+                {"data": "today"},
+                {
+                    "render": function ( data, type, row, meta ) {
+                      return `<a href="{{url_for('apitest')}}">Edit</a>`; }
+         
+                  },
+                  {
+                    "render": function ( data, type, row, meta ) {
+                      return '<a href="'+row.name+'">Delete</a>'; }
+         
+                  }
+            ]
+        });
+    });
+}
+$( window ).on( "load", setupData );
+</script>
+<!-- <script src="{{url_for('static', filename='jquery.js')}}"></script>
+<script src="{{url_for('static', filename='scripts2.js')}}"></script> -->
+</body>
+</html>

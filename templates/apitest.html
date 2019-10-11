@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX API TUTORIAL</title>
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	
+</head>
+<body>
+
+        <script>
+                function lettersOnly(input) {
+                    var regex = /[^a-z]/gi;
+                    input.value = input.value.replace(regex, "");
+                }
+                </script>
+    <h1>AJAX API TUTORIAL</h1>
+    <button id="get-button">Read/get users</button>
+
+
+
+
+   
+    <form id="addform1" action="javascript:void(0)"  method="POST">
+        <br>
+        
+        <div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+        
+        <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+       
+        <input type="text"  id="fnameid1" onkeyup="lettersOnly(this)"></br>
+       
+        <span id ="fnameid" class="text-danger font-weight-bold"></span>
+    </br>
+       
+        <input type="text" id="emailid1" onkeyup="lettersOnly(this)">
+</br>
+        <span id ="emailid" class="text-danger font-weight-bold"></span>
+    </br>
+        <!-- <input type="text" id="create2-input"> -->
+        <input id="btn" type="submit" value="Create/Post">
+    </form>
+
+
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>RandomID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- <script type="text/javascript">
+        
+        function validation(){
+            var fname = document.getElementById('fnameid1').value;
+            var email = document.getElementById('emailid1').value;
+
+            if (fname ==""){
+                document.getElementById('fnameid').innerHTML="** Please fill the Full Name";
+                return false;
+            }
+
+            if (email ==""){
+                document.getElementById('emailid').innerHTML="** Please fill the Email feilds";
+                return false;
+            }
+        } -->
+
+    <!-- </script> -->
+    <script src="{{url_for('static', filename='jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='scripts2.js')}}"></script>
+    <script src="{{url_for('static', filename='scripts3.js')}}"></script>
+    <!-- <script>
+        $(function(){
+            //get/read
+            $('#get-button').on('click', function(){
+ console.log('TEST');
+            });
+        });
+    </script> -->
+
+    <!-- <script> 
+        $(document).on('submit', '#addform1', function(e) {
+            
+                e.preventDefault();
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '/users',
+                    data:JSON.stringify({
+                        fname: $('#fnameid1').val(),
+                        email: $('#emailid1').val(),
+                    }),
+                    contentType: 'application/json',
+                    
+                    beforeSend: function(){
+                        document.getElementById('btn').value="Loading..."
+                    },
+                
+                    success: function(data){
+                        
+
+                        if (data.error){
+                            $('#errorAlert').text(data.error).show();
+                            $('#successAlert').hide();
+                        }
+                        else{
+                            $('#successAlert').text('Submited succesfully').show();
+                            $('#errorAlert').hide();
+                        }
+                    document.getElementById('fnameid1').value="";
+                    document.getElementById('emailid1').value="";
+                                
+                            },
+                    statusCode : {
+                        403 : function(){
+                                alert('method forbidden')
+                        },
+                        500 : function(){
+                            alert('internal server error')
+                    },
+                    404 : function(){
+                        alert('not found')
+                },
+                    },                 error : function(XMLHttpRequest, textStatus, errorThrown){
+                                            }
+                });
+        });
+    </script> -->
+
+
+</body>
+</html>

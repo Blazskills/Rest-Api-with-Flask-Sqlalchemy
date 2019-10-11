@@ -28,6 +28,31 @@ class membertb(db.Model):
        random = db.Column(db.Integer)
        today=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+class usertb(db.Model,UserMixin):
+       id = db.Column(db.Integer,primary_key=True)
+       fname = db.Column(db.String(255))
+       email= db.Column(db.String(255), unique=True)
+       password = db.Column(db.String(255))
+       isuser = db.Column(db.Boolean, default=False, nullable=False)
+       isAdmin = db.Column(db.Boolean, default=False, nullable=False)
+       issuper = db.Column(db.Boolean, default=False, nullable=False)
+       today=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+class productstb(db.Model,UserMixin):
+    id = db.Column(db.Integer,primary_key=True)
+    productid = db.Column(db.String(255))
+    productname = db.Column(db.String(255))
+    oldprice = db.Column(db.BigInteger,default=0)
+    newprice = db.Column(db.BigInteger,default=0)
+    description= db.Column(db.Text)
+    hl1 = db.Column(db.Text)
+    hl2 = db.Column(db.Text)
+    mainimg =db.Column(db.String(200))
+    category =db.Column(db.String(200))
+    trend = db.Column(db.Boolean, default=False, nullable=False)
+    today=db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
 
 
 
@@ -40,6 +65,7 @@ class UserSchema(ma.ModelSchema):
 
 
 #post new user/create new user
+
 @app.route('/users', methods=['POST'])
 def user():
         user_schema =UserSchema(strict=True)
@@ -49,8 +75,39 @@ def user():
         new_user.random =randint(1,1000)
         db.session.add(new_user)
         db.session.commit()
-        return user_schema.jsonify(new_user)
-    
+    # return redirect('datatable')
+        return jsonify({'message' : "Information submitted successfully"})    
+
+
+
+
+
+
+
+
+
+
+# @app.route('/users', methods=['POST'])
+# def user():
+#         user_schema =UserSchema(strict=True)
+#         fname = request.json['fname']
+#         email = request.json['email']
+#         # if (fname == ""):
+#         #     return jsonify({'error' : "fname empty"})
+#         if len(request.json["email"])== 0 or len(request.json["fname"])==0:
+#             return jsonify({'error' : "email empty or name"})
+#         else:  
+#             new_user = membertb(fname=fname, email=email)
+#             new_user.random =randint(1,1000)
+#             db.session.add(new_user)
+#             db.session.commit()
+#         # return redirect('datatable')
+#             return jsonify({'message' : "Information submitted successfully"})    
+
+
+
+
+
 
 
 #end point to show all user data
@@ -99,9 +156,15 @@ def delete_detail(id):
     return jsonify({'Message' : "Id does not exist to be deleted"})
 
 
+@app.route('/apitest')
+def apitest():
+    return render_template('apitest.html' , title="ajax testing apisz")
 
+@app.route('/datatable')
+def datatable():
+    return render_template('datatable.html')
 
 
 
 if __name__ == "__main__":
-    app.run(port=5000 ,debug=True)
+    app.run(port=8000 ,debug=True)
